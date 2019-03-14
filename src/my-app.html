@@ -119,13 +119,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <sub-toevoegen name="toevoegen"></sub-toevoegen>
-          <sub-verwijderen name="verwijderen"></sub-verwijderen>
-          <sub-actief name="actief"></sub-actief>
-          <sub-inactief name="inactief"></sub-inactief>
-          <sub-naamwijzigen name="naamwijzigen"></sub-naamwijzigen>
-          <sub-ingredientenwijzigen name="ingredientenwijzigen"></sub-ingredientenwijzigen>
-          <sub-itoevoegen name="itoevoegen" ingredienten={{ingredienten}}></sub-itoevoegen>
+          <sub-toevoegen name="toevoegen" gerechten={{gerechten}}></sub-toevoegen>
+          <sub-verwijderen name="verwijderen" gerechten={{gerechten}}></sub-verwijderen>
+          <sub-actief name="actief" gerechten={{gerechten}}></sub-actief>
+          <sub-inactief name="inactief" gerechten={{gerechten}}></sub-inactief>
+          <sub-naamwijzigen name="naamwijzigen" gerechten={{gerechten}}></sub-naamwijzigen>
+          <sub-ingredientenwijzigen name="ingredientenwijzigen" gerechten={{gerechten}} ingredienten=[[ingredienten]]></sub-ingredientenwijzigen>
+          <sub-itoevoegen name="itoevoegen" ingredienten={{ingredienten}} gerechten={{gerechten}}></sub-itoevoegen>
           <sub-iverwijderen name="iverwijderen" ingredienten={{ingredienten}}></sub-iverwijderen>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
@@ -155,7 +155,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             type: Array,
             value: ["Appel", "Ananas", "Banaan", "Citroen", "Komkommer", "Tomaat", "Ui"]
           },
-          gerechten: Array
+          gerechten: {
+            type: Array,
+            value: []
+          }
         };
       }
 
