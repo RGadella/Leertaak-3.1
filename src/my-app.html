@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="dashboard">
+<dom-module id="my-app">
   <template>
     <style>
       :host {
@@ -15,18 +15,18 @@
      * @customElement
      * @polymer
      */
-    class Dashboard extends Polymer.Element {
-      static get is() { return 'dashboard'; }
+    class MyApp extends Polymer.Element {
+      static get is() { return 'my-app'; }
       static get properties() {
         return {
           prop1: {
             type: String,
-            value: 'dashboard'
+            value: 'my-app'
           }
         };
       }
     }
 
-    window.customElements.define(Dashboard.is, Dashboard);
+    window.customElements.define(MyApp.is, MyApp);
   </script>
 </dom-module>
