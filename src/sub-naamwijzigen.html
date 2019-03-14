@@ -78,32 +78,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           oudenaam: String,
           nieuwenaam: String
         }
-    }
-
-    wijzigen() {
-      if (this.oudenaam == "" || this.oudenaam == undefined) {
-        this.modalBericht = 'U moet een gerecht selecteren';
-      } else if (this.nieuwenaam == "") {
-        this.modalBericht = 'U moet een nieuwe naam invullen';
-      } else {
-        this.modalBericht = `Naam "${this.oudenaam}" is gewijzigd naar "${this.nieuwenaam}".`;
-        var thus = this;
-        this.gerechten.forEach(function(gerecht) {
-          if(gerecht.naam == thus.oudenaam){
-            thus.splice('gerechten', thus.gerechten.indexOf(gerecht), 1);
-            thus.push('gerechten', { naam: thus.nieuwenaam, ingredienten: gerecht.ingredienten, actief: gerecht.actief })
-          }
-        })
-        this.$.list.selected = null;
-        this.nieuwenaam = "";
       }
-      this.$.modal.open();
-    }
 
-    reset() {
-      this.$.list.selected = null;
+      wijzigen() {
+        if (this.oudenaam == "" || this.oudenaam == undefined) {
+          this.modalBericht = 'U moet een gerecht selecteren';
+        } else if (this.nieuwenaam == "") {
+          this.modalBericht = 'U moet een nieuwe naam invullen';
+        } else {
+          this.modalBericht = `Naam "${this.oudenaam}" is gewijzigd naar "${this.nieuwenaam}".`;
+          var thus = this;
+          this.gerechten.forEach(function(gerecht) {
+            if(gerecht.naam == thus.oudenaam){
+              thus.splice('gerechten', thus.gerechten.indexOf(gerecht), 1);
+              thus.push('gerechten', { naam: thus.nieuwenaam, ingredienten: gerecht.ingredienten, actief: gerecht.actief })
+            }
+          })
+          this.$.list.selected = null;
+          this.nieuwenaam = "";
+        }
+        this.$.modal.open();
+      }
+
+      reset() {
+        this.$.list.selected = null;
+      }
     }
-  }
 
     window.customElements.define(NaamWijzigen.is, NaamWijzigen);
   </script>
