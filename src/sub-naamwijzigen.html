@@ -9,6 +9,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<script src="../bower_components/web-animations-js/web-animations-next-lite.min.js"></script>
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="sub-naamwijzigen">
@@ -16,21 +22,87 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
+      }
+
+      paper-item:hover {
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      paper-listbox {
+        width: 200px;
+      }
+
+      paper-button.verwijder {
+        background-color: #4285f4;
+        color: white;
+      }
+
+      paper-dropdown-menu {
+        width: 100%;
       }
     </style>
 
     <div class="card">
       <h1>Naam wijzigen</h1>
-      <p>Modus commodo minimum eum te, vero utinam assueverit per eu.</p>
-      <p>Ea duis bonorum nec, falli paulo aliquid ei eum.Has at minim mucius aliquam, est id tempor laoreet.Pro saepe pertinax ei, ad pri animal labores suscipiantur.</p>
+      <paper-dropdown-menu label="Gerecht" value={{oudenaam}}>
+        <paper-listbox slot="dropdown-content" class="dropdown-content" id="list">
+          <template is="dom-repeat" items=[[gerechten]] as="gerecht1">
+            <paper-item>[[gerecht1.naam]]</paper-item>
+          </template>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-input label="Nieuwe naam" value="{{nieuwenaam}}"></paper-input>
+      <br>
+      <paper-button on-click="wijzigen" class='verwijder'>Wijzigen</paper-button>
+      <paper-button on-click="reset" class='verwijder'>Reset</paper-button>
     </div>
+
+    <paper-dialog id="modal">
+      <p>[[modalBericht]]</p>
+      <div class="buttons">
+        <paper-button dialog-confirm autofocus>OK</paper-button>
+      </div>
+    </paper-dialog>
   </template>
 
   <script>
     class NaamWijzigen extends Polymer.Element {
       static get is() { return 'sub-naamwijzigen'; }
+      static get properties() {
+        return {
+          ingredient: String,
+          modalBericht: String,
+          oudenaam: String,
+          nieuwenaam: String
+        }
+      }
+
+      wijzigen() {
+        if (this.oudenaam == "" || this.oudenaam == undefined) {
+          this.modalBericht = 'U moet een gerecht selecteren';
+        } else if (this.nieuwenaam == "") {
+          this.modalBericht = 'U moet een nieuwe naam invullen';
+        } else {
+          this.modalBericht = `Naam "${this.oudenaam}" is gewijzigd naar "${this.nieuwenaam}".`;
+          var thus = this;
+          this.gerechten.forEach(function(gerecht) {
+            if(gerecht.naam == thus.oudenaam){
+              thus.splice('gerechten', thus.gerechten.indexOf(gerecht), 1);
+              thus.push('gerechten', { naam: thus.nieuwenaam, ingredienten: gerecht.ingredienten, actief: gerecht.actief })
+            }
+          })
+          this.$.list.selected = null;
+          this.nieuwenaam = "";
+        }
+        this.$.modal.open();
+      }
+
+      reset() {
+        this.$.list.selected = null;
+      }
     }
 
     window.customElements.define(NaamWijzigen.is, NaamWijzigen);
