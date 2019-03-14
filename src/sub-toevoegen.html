@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="sub-toevoegen">
@@ -27,6 +28,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="card">
       <h1>Gerecht toevoegen</h1>
       <paper-input label="Naam" value="{{gerecht.naam}}"></paper-input>
+      <template is="dom-repeat" items="{{ingredienten}}">
+        <paper-checkbox>{{item}}</paper-checkbox>
+      </template>
       <paper-button raised on-click="toevoegen" class="toevoegen">Toevoegen</paper-button>
       <paper-button raised on-click="reset" class="toevoegen">Reset</paper-button>
     </div>
