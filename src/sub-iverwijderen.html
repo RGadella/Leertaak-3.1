@@ -78,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       verwijder() {
-        if (this.ingredient == undefined) {
+        if (this.ingredient == undefined || this.ingredient == "") {
           this.modalBericht = 'U moet een ingredient selecteren';
         } else {
           this.modalBericht = `Ingredient "${this.ingredient}" is verwijderd`;

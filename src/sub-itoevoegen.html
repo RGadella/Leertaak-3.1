@@ -30,7 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card">
       <h1>Ingredient toevoegen</h1>
-      <paper-input label="Naam" value="{{ingredient}}"></paper-input>
+      <paper-input label="Naam" value="{{ingredient}}" on-keydown="_checkForEnter"></paper-input>
       <paper-button raised on-click="iToevoegen" class="toevoegen">Toevoegen</paper-button>
       <paper-button raised on-click="reset" class="toevoegen">Reset</paper-button>
     </div>
@@ -50,6 +50,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return {
           ingredient: String,
           modalBericht: String
+        }
+      }
+
+      _checkForEnter(e) {
+        if (e.keyCode == 13) {
+          this.iToevoegen();
         }
       }
 
