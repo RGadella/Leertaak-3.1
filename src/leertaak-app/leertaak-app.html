@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="leertaak-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class LeertaakApp extends Polymer.Element {
+      static get is() { return 'leertaak-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'leertaak-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(LeertaakApp.is, LeertaakApp);
+  </script>
+</dom-module>
