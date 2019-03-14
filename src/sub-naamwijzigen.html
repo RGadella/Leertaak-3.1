@@ -90,10 +90,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var thus = this;
         this.gerechten.forEach(function(gerecht) {
           if(gerecht.naam == thus.oudenaam){
-            gerecht.naam = thus.nieuwenaam;
+            thus.splice('gerechten', thus.gerechten.indexOf(gerecht), 1);
+            thus.push('gerechten', { naam: thus.nieuwenaam, ingredienten: gerecht.ingredienten, actief: gerecht.actief })
           }
         })
         this.$.list.selected = null;
+        this.nieuwenaam = "";
       }
       this.$.modal.open();
     }
