@@ -9,6 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="sub-toevoegen">
@@ -23,14 +26,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card">
       <h1>Gerecht toevoegen</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <paper-input label="Naam" value="{{gerecht.naam}}"></paper-input>
+      <paper-button raised on-click="toevoegen" class="toevoegen">Toevoegen</paper-button>
+      <paper-button raised on-click="reset" class="toevoegen">Reset</paper-button>
     </div>
+
+    <paper-dialog id="modal">
+      <p>[[modalBericht]]</p>
+      <div class="buttons">
+        <paper-button dialog-confirm autofocus>OK</paper-button>
+      </div>
+    </paper-dialog>
   </template>
 
   <script>
     class Toevoegen extends Polymer.Element {
       static get is() { return 'sub-toevoegen'; }
+      static get properties() {
+        return {
+          gerecht: {
+            type: Array,
+            value: [{naam: String, ingredienten: [], actief: false}]
+          },
+          modalBericht: String
+        }
+      }
+
+      toevoegen() {
+        var gerechtNaam = this.gerecht.naam.charAt(0).toUpperCase() + this.gerecht.naam.substr(1).toLowerCase();
+        this.modalBericht = `Gerecht "${gerechtNaam}" is toegevoegd`;
+        this.$.modal.open();
+      }
+
+      reset() {
+        this.gerecht = "";
+      }
     }
 
     window.customElements.define(Toevoegen.is, Toevoegen);
