@@ -90,7 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="actief" href="[[rootPath]]actief">Actief zetten</a>
           <a name="inactief" href="[[rootPath]]inactief">Inactief zetten</a>
           <a name="naamwijzigen" href="[[rootPath]]naamwijzigen">Naam wijzigen</a>
-          <a name="ingwijzigen" href="[[rootPath]]ingwijzigen">Ingredienten wijzigen</a>
+          <a name="ingredientenwijzigen" href="[[rootPath]]ingredientenwijzigen">Ingredienten wijzigen</a>
         </iron-selector>
         <app-toolbar>Ingredienten</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
@@ -115,8 +115,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             fallback-selection="view404"
             role="main">
           <sub-toevoegen name="toevoegen"></sub-toevoegen>
-          <my-view2 name="verwijderen"></my-view2>
-          <my-view3 name="actief"></my-view3>
+          <sub-verwijderen name="verwijderen"></sub-verwijderen>
+          <sub-actief name="actief"></sub-actief>
+          <sub-inactief name="inactief"></sub-inactief>
+          <sub-naamwijzigen name="naamwijzigen"></sub-naamwijzigen>
+          <sub-ingredientenwijzigen name="ingredientenwijzigen"></sub-ingredientenwijzigen>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
