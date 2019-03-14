@@ -125,7 +125,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <sub-inactief name="inactief"></sub-inactief>
           <sub-naamwijzigen name="naamwijzigen"></sub-naamwijzigen>
           <sub-ingredientenwijzigen name="ingredientenwijzigen"></sub-ingredientenwijzigen>
-          <sub-itoevoegen name="itoevoegen"></sub-itoevoegen>
+          <sub-itoevoegen name="itoevoegen" ingredienten={{ingredienten}}></sub-itoevoegen>
           <sub-iverwijderen name="iverwijderen"></sub-iverwijderen>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
@@ -153,6 +153,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
+          ingredienten: {
+            type: Array,
+            value: []
+          },
+          gerechten: Array
         };
       }
 

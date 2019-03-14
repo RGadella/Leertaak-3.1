@@ -9,6 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="sub-itoevoegen">
@@ -16,21 +19,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
+      }
+
+      paper-button.toevoegen {
+        background-color: #4285f4;
+        color: white;
       }
     </style>
 
     <div class="card">
       <h1>Ingredient toevoegen</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <paper-input label="Naam" value="{{ingredient}}"></paper-input>
+      <paper-button raised on-click="iToevoegen" class="toevoegen">Toevoegen</paper-button>
+      <paper-button raised on-click="reset" class="toevoegen">Reset</paper-button>
     </div>
+
+    <paper-dialog id="modal">
+      <p>[[modalBericht]]</p>
+      <div class="buttons">
+        <paper-button dialog-confirm autofocus>OK</paper-button>
+      </div>
+    </paper-dialog>
   </template>
 
   <script>
     class IToevoegen extends Polymer.Element {
       static get is() { return 'sub-itoevoegen'; }
+      static get properties() {
+        return {
+          ingredient: String,
+          modalBericht: String
+        }
+      }
+
+      iToevoegen() {
+        var parsedIngredient = this.ingredient.charAt(0).toUpperCase() + this.ingredient.substr(1).toLowerCase();
+        if (this.ingredient.length == 0) {
+          this.modalBericht = 'U moet een waarde invullen';
+        } else if (this.ingredienten.indexOf(parsedIngredient) >= 0) {
+          this.modalBericht = 'Dit ingredient bestaat al';
+        } else {
+          this.push('ingredienten', parsedIngredient);
+          this.modalBericht = `Ingredient "${parsedIngredient}" is toegevoegd`;
+          this.ingredient = "";
+        }
+        this.$.modal.open();
+      }
+
+      reset() {
+        this.ingredient = "";
+      }
+
     }
 
     window.customElements.define(IToevoegen.is, IToevoegen);
