@@ -90,7 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var checkboxen = Polymer.dom(this.root).querySelectorAll('.cbox')
         var thus = this;
         this.gerechten.forEach(gerecht => {
-          if (gerecht.naam == thus.gerechtnaam) {
+          if (gerecht.naam === thus.gerechtnaam) {
             thus._ingredienten = gerecht.ingredienten;
           }
         })

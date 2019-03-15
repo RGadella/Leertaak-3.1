@@ -27,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card">
       <h1>Gerecht toevoegen</h1>
-      <paper-input label="Naam" value="{{gerecht.naam}}"></paper-input>
+      <paper-input label="Naam" value="{{gerechtnaam}}"></paper-input>
       <br>
       <h4>Kies ingredienten:</h4>
       <template is="dom-repeat" items="{{ingredienten}}">
@@ -51,10 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get is() { return 'sub-toevoegen'; }
       static get properties() {
         return {
-          gerecht: {
-            type: Array,
-            value: [{naam: String, ingredienten: [], actief: false}]
-          },
+          gerechtnaam: String,
           modalBericht: String,
           _ingredienten: {
             type: Array,
@@ -72,9 +69,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       toevoegen() {
-        console.log(this.gerecht.naam);
-        var gerechtNaam = this.gerecht.naam.charAt(0).toUpperCase() + this.gerecht.naam.substr(1).toLowerCase();
-        if (this.gerecht.naam.length == 0) {
+        var gerechtNaam = this.gerechtnaam.charAt(0).toUpperCase() + this.gerechtnaam.substr(1).toLowerCase();
+        if (this.gerechtnaam.length == 0) {
           this.modalBericht = 'U moet een waarde invullen!';
         } else {
           var bestaat = false;
@@ -97,7 +93,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       reset() {
         var checkboxen = Polymer.dom(this.root).querySelectorAll('.cbox')
-        this.gerecht = null;
+        this.gerechtnaam = "";
+        this._ingredienten = [];
         checkboxen.forEach(checkbox => {
           checkbox.checked = false;
         })
