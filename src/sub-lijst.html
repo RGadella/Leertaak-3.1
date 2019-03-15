@@ -21,11 +21,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         padding: 10px;
       }
+
+      table {
+        width: 100%;
+      }
+
+      th {
+        text-align: left;
+      }
     </style>
 
     <div class="card">
       <h1>Alle gerechten</h1>
-      <p>hallo</p>
+      <table>
+        <tr>
+          <th>Naam</th>
+          <th>Ingredienten</th>
+          <th>Actief</th>
+        </tr>
+        <template is="dom-repeat" items=[[gerechten]]>
+          <tr>
+            <td>[[item.naam]]</td>
+            <td>[[item.ingredienten]]</td>
+            <td>[[item.actief]]</td>
+          </tr>
+        </template>
+      </table>
     </div>
   </template>
 
