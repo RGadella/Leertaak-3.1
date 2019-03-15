@@ -31,6 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <template is="dom-repeat" items="{{ingredienten}}">
         <paper-checkbox>{{item}}</paper-checkbox>
       </template>
+      <br><br>
       <paper-button raised on-click="toevoegen" class="toevoegen">Toevoegen</paper-button>
       <paper-button raised on-click="reset" class="toevoegen">Reset</paper-button>
     </div>
@@ -58,7 +59,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       toevoegen() {
         var gerechtNaam = this.gerecht.naam.charAt(0).toUpperCase() + this.gerecht.naam.substr(1).toLowerCase();
-        this.modalBericht = `Gerecht "${gerechtNaam}" is toegevoegd`;
+        if (this.gerecht.naam.length == 0) {
+          this.modalBericht = 'U moet een waarde invullen!';
+        } else {
+          var bestaat = false;
+          var thus = this;
+          this.gerechten.forEach(gerecht => {
+            if (gerechtNaam == gerecht.naam) {
+              bestaat = true;
+            }
+          });
+          if (bestaat) {
+            this.modalBericht = 'Dit gerecht bestaat al!';
+          } else {
+            this.modalBericht = `Gerecht "${gerechtNaam}" is toegevoegd`;
+          }
+        }
         this.$.modal.open();
       }
 
