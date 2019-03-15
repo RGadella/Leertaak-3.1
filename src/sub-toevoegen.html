@@ -29,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h1>Gerecht toevoegen</h1>
       <paper-input label="Naam" value="{{gerecht.naam}}"></paper-input>
       <template is="dom-repeat" items="{{ingredienten}}">
-        <paper-checkbox>{{item}}</paper-checkbox>
+        <paper-checkbox on-change="checkboxChanged">{{item}}</paper-checkbox>
       </template>
       <br><br>
       <paper-button raised on-click="toevoegen" class="toevoegen">Toevoegen</paper-button>
@@ -53,8 +53,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             type: Array,
             value: [{naam: String, ingredienten: [], actief: false}]
           },
-          modalBericht: String
+          modalBericht: String,
+          _ingredienten: {
+            type: Array,
+            value: []
+          }
         }
+      }
+
+
+
+      checkboxChanged(event) {
+        if(event.target.checked) {
+          this.push('_ingredienten', event.target.innerHTML)
+        } else {
+          this.splice('_ingredienten', this._ingredienten.indexOf(event.target.innerHTML), 1)
+        }
+        console.log(this._ingredienten);
       }
 
       toevoegen() {
@@ -73,6 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.modalBericht = 'Dit gerecht bestaat al!';
           } else {
             this.modalBericht = `Gerecht "${gerechtNaam}" is toegevoegd`;
+            this.push('gerechten', {naam: gerechtNaam, ingredienten: this._ingredienten, actief: false})
           }
         }
         this.$.modal.open();
