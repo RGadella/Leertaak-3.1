@@ -28,12 +28,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="card">
       <h1>Gerecht toevoegen</h1>
       <paper-input label="Naam" value="{{gerecht.naam}}"></paper-input>
+      <br>
+      <h4>Kies ingredienten:</h4>
       <template is="dom-repeat" items="{{ingredienten}}">
-        <paper-checkbox class="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox>
+        <paper-checkbox class="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox><br>
       </template>
-      <br><br>
-      <paper-button raised on-click="toevoegen" class="toevoegen">Toevoegen</paper-button>
-      <paper-button raised on-click="reset" class="toevoegen">Reset</paper-button>
+      <br>
+      <paper-button raised on-click="toevoegen" class="wijzig">Toevoegen</paper-button>
+      <paper-button raised on-click="reset" class="reset">Reset</paper-button>
     </div>
 
     <paper-dialog id="modal">
@@ -70,6 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       toevoegen() {
+        console.log(this.gerecht.naam);
         var gerechtNaam = this.gerecht.naam.charAt(0).toUpperCase() + this.gerecht.naam.substr(1).toLowerCase();
         if (this.gerecht.naam.length == 0) {
           this.modalBericht = 'U moet een waarde invullen!';

@@ -35,11 +35,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 200px;
       }
 
-      paper-button.verwijder {
-        background-color: #4285f4;
-        color: white;
-      }
-
       paper-dropdown-menu {
         width: 100%;
       }
@@ -56,8 +51,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-dropdown-menu>
       <paper-input label="Nieuwe naam" value="{{nieuwenaam}}"></paper-input>
       <br>
-      <paper-button on-click="wijzigen" class='verwijder'>Wijzigen</paper-button>
-      <paper-button on-click="reset" class='verwijder'>Reset</paper-button>
+      <paper-button on-click="wijzigen" class="wijzig">Wijzigen</paper-button>
+      <paper-button on-click="reset" class="reset">Reset</paper-button>
     </div>
 
     <paper-dialog id="modal">

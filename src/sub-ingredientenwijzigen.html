@@ -36,11 +36,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 200px;
       }
 
-      paper-button.verwijder {
-        background-color: #4285f4;
-        color: white;
-      }
-
       paper-dropdown-menu {
         width: 100%;
       }
@@ -55,12 +50,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
+      <br>
+      <h4>Ingredienten:</h4>
       <template is="dom-repeat" items="{{ingredienten}}">
-        <paper-checkbox class="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox>
+        <paper-checkbox class="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox><br>
       </template>
       <br>
-      <paper-button on-click="wijzigen" class='verwijder'>Wijzigen</paper-button>
-      <paper-button on-click="reset" class='verwijder'>Reset</paper-button>
+      <paper-button on-click="wijzigen" class="wijzig">Wijzigen</paper-button>
+      <paper-button on-click="reset" class="reset">Reset</paper-button>
     </div>
 
     <paper-dialog id="modal">

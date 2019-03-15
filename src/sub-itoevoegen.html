@@ -21,18 +21,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         padding: 10px;
       }
-
-      paper-button.toevoegen {
-        background-color: #4285f4;
-        color: white;
-      }
     </style>
 
     <div class="card">
       <h1>Ingredient toevoegen</h1>
       <paper-input label="Naam" value="{{ingredient}}" on-keydown="_checkForEnter"></paper-input>
-      <paper-button raised on-click="iToevoegen" class="toevoegen">Toevoegen</paper-button>
-      <paper-button raised on-click="reset" class="toevoegen">Reset</paper-button>
+      <br>
+      <paper-button raised on-click="iToevoegen" class="wijzig">Toevoegen</paper-button>
+      <paper-button raised on-click="reset" class="reset">Reset</paper-button>
     </div>
 
     <paper-dialog id="modal">
