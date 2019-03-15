@@ -15,6 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="sub-ingredientenwijzigen">
@@ -46,14 +47,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
-      <h1>Naam wijzigen</h1>
-      <paper-dropdown-menu label="Gerecht" value={{oudenaam}}>
+      <h1>Ingredienten wijzigen</h1>
+      <paper-dropdown-menu label="Gerecht" value={{gerechtnaam}}>
         <paper-listbox slot="dropdown-content" class="dropdown-content" id="list">
           <template is="dom-repeat" items=[[gerechten]] as="gerecht1">
             <paper-item>[[gerecht1.naam]]</paper-item>
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
+      <template is="dom-repeat" items="{{ingredienten}}">
+        <paper-checkbox id="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox>
+      </template>
       <br>
       <paper-button on-click="wijzigen" class='verwijder'>Wijzigen</paper-button>
       <paper-button on-click="reset" class='verwijder'>Reset</paper-button>
@@ -72,12 +76,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get is() { return 'sub-ingredientenwijzigen'; }
       static get properties() {
         return {
-          modalBericht: String
+          modalBericht: String,
+          _ingredienten: {
+            type: Array,
+            value: []
+          },
+          gerechtnaam: {
+            type: String,
+            value: '',
+            observer: '_nieuwGerecht'
+          }
+        }
+      }
+
+      _nieuwGerecht() {
+        console.log(this.$.querySelector('#cbox'));
+      }
+
+      checkboxChanged(event) {
+        if(event.target.checked) {
+          this.push('_ingredienten', event.target.innerHTML)
+        } else {
+          this.splice('_ingredienten', this._ingredienten.indexOf(event.target.innerHTML), 1)
         }
       }
 
       wijzigen() {
-        this.modalBericht("Test")
+        this.modalBericht = "Test";
         this.$.modal.open();
       }
 
