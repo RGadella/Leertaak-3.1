@@ -85,7 +85,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.splice('ingredienten', this.ingredienten.indexOf(this.ingredient), 1);
         }
         this.$.modal.open();
-        this.$.list.selected = null;
+        this.reset();
       }
 
       reset() {

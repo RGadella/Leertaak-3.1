@@ -94,14 +94,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               thus.push('gerechten', { naam: thus.nieuwenaam, ingredienten: gerecht.ingredienten, actief: gerecht.actief })
             }
           })
-          this.$.list.selected = null;
-          this.nieuwenaam = "";
+          this.reset()
         }
         this.$.modal.open();
       }
 
       reset() {
         this.$.list.selected = null;
+        this.nieuwenaam = "";
       }
     }
 

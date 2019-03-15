@@ -56,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-listbox>
       </paper-dropdown-menu>
       <template is="dom-repeat" items="{{ingredienten}}">
-        <paper-checkbox id="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox>
+        <paper-checkbox class="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox>
       </template>
       <br>
       <paper-button on-click="wijzigen" class='verwijder'>Wijzigen</paper-button>
@@ -90,7 +90,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _nieuwGerecht() {
-        console.log(this.$.querySelector('#cbox'));
+        var checkboxen = Polymer.dom(this.root).querySelectorAll('.cbox')
+        var thus = this;
+        this.gerechten.forEach(gerecht => {
+          if (gerecht.naam == thus.gerechtnaam) {
+            thus._ingredienten = gerecht.ingredienten;
+          }
+        })
+        checkboxen.forEach(checkbox => {
+          if (thus._ingredienten.indexOf(checkbox.innerHTML) >= 0) {
+            checkbox.checked = true;
+          } else {
+            checkbox.checked = false;
+          }
+        })
       }
 
       checkboxChanged(event) {
@@ -102,11 +115,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       wijzigen() {
-        this.modalBericht = "Test";
+        var thus = this;
+        if (this.gerechtnaam == null || this.gerechtnaam == undefined || this.gerechtnaam == '') {
+          this.modalBericht = "U heeft geen gerecht geselecteerd";
+        } else {
+          this.modalBericht = `De ingredienten zijn aangepast`
+          this.gerechten.forEach(function(gerecht) {
+            if(gerecht.naam == thus.gerechtnaam){
+              thus.splice('gerechten', thus.gerechten.indexOf(gerecht), 1);
+              thus.push('gerechten', { naam: gerecht.naam, ingredienten: thus._ingredienten, actief: gerecht.actief })
+            }
+          })
+          this.reset();
+        }
         this.$.modal.open();
       }
 
       reset() {
+        this._ingredienten = []
         this.$.list.selected = null;
       }
     }

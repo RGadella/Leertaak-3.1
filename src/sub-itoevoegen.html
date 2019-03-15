@@ -68,7 +68,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         } else {
           this.push('ingredienten', parsedIngredient);
           this.modalBericht = `Ingredient "${parsedIngredient}" is toegevoegd`;
-          this.ingredient = "";
+          this.reset();
           this.ingredienten.sort();
         }
         this.$.modal.open();

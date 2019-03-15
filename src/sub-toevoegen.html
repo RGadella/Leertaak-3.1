@@ -29,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h1>Gerecht toevoegen</h1>
       <paper-input label="Naam" value="{{gerecht.naam}}"></paper-input>
       <template is="dom-repeat" items="{{ingredienten}}">
-        <paper-checkbox on-change="checkboxChanged">{{item}}</paper-checkbox>
+        <paper-checkbox class="cbox" on-change="checkboxChanged">{{item}}</paper-checkbox>
       </template>
       <br><br>
       <paper-button raised on-click="toevoegen" class="toevoegen">Toevoegen</paper-button>
@@ -60,7 +60,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
       }
-      
+
       checkboxChanged(event) {
         if(event.target.checked) {
           this.push('_ingredienten', event.target.innerHTML)
@@ -86,13 +86,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           } else {
             this.modalBericht = `Gerecht "${gerechtNaam}" is toegevoegd`;
             this.push('gerechten', {naam: gerechtNaam, ingredienten: this._ingredienten, actief: false})
+            this.reset();
           }
         }
         this.$.modal.open();
       }
 
       reset() {
-        this.gerecht = "";
+        var checkboxen = Polymer.dom(this.root).querySelectorAll('.cbox')
+        this.gerecht = null;
+        checkboxen.forEach(checkbox => {
+          checkbox.checked = false;
+        })
       }
     }
 
