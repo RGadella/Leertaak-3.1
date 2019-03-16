@@ -43,7 +43,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <template is="dom-repeat" items=[[gerechten]]>
           <tr>
             <td>[[item.naam]]</td>
-            <td>[[item.ingredienten]]</td>
+            <td>
+              <template is="dom-repeat" items=[[item.ingredienten]] as="ingredient">
+              [[ingredient]]
+              </template>
+            </td>
             <td>[[item.actief]]</td>
           </tr>
         </template>
