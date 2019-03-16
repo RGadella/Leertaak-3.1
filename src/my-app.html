@@ -20,6 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 <link rel="import" href="my-icons.html">
 
 <link rel="lazy-import" href="my-view404.html">
@@ -129,11 +130,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <sub-naamwijzigen name="naamwijzigen" gerechten={{gerechten}}></sub-naamwijzigen>
           <sub-ingredientenwijzigen name="ingredientenwijzigen" gerechten={{gerechten}} ingredienten=[[ingredienten]]></sub-ingredientenwijzigen>
           <sub-itoevoegen name="itoevoegen" ingredienten={{ingredienten}} gerechten={{gerechten}}></sub-itoevoegen>
-          <sub-iverwijderen name="iverwijderen" ingredienten={{ingredienten}}></sub-iverwijderen>
+          <sub-iverwijderen name="iverwijderen" ingredienten={{ingredienten}} gerechten=[[gerechten]]></sub-iverwijderen>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
+
+    <app-localstorage-document key="gerechten" data="{{gerechten}}"></app-localstorage-document>
+    <app-localstorage-document key="ingredienten" data="{{ingredienten}}"></app-localstorage-document>
   </template>
 
   <script>
@@ -156,12 +160,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           rootPath: String,
           ingredienten: {
             type: Array,
-            value: ["Appel", "Ananas", "Banaan", "Citroen", "Komkommer", "Tomaat", "Ui", "Zalm", "Wrap"]
+            value: []
           },
           gerechten: {
             type: Array,
-            value: [{ naam: "Zalm wrap", ingredienten: ["Zalm", "Wrap"], actief: false },
-                    { naam: "Kip kabab", ingredienten: ["Kip", "Kabab"], actief: false}]
+            value: []
           }
         };
       }

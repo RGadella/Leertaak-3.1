@@ -73,14 +73,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       verwijder() {
-        if (this.ingredient == undefined || this.ingredient == "") {
+        var containsIn = false;
+        var ingredient = this.ingredient;
+        this.gerechten.forEach(gerecht => {
+          if (gerecht.ingredienten.indexOf(ingredient) >= 0) {
+            containsIn = true;
+          }
+        })
+        if (ingredient == undefined || ingredient == "") {
           this.modalBericht = 'U moet een ingredient selecteren';
+        } else if (containsIn) {
+          this.modalBericht = 'Dit ingredient wordt gebruikt in een gerecht en kan daarom niet verwijderd worden'
         } else {
-          this.modalBericht = `Ingredient "${this.ingredient}" is verwijderd`;
-          this.splice('ingredienten', this.ingredienten.indexOf(this.ingredient), 1);
+          this.modalBericht = `Ingredient "${ingredient}" is verwijderd`;
+          this.splice('ingredienten', this.ingredienten.indexOf(ingredient), 1);
+          this.reset();
         }
         this.$.modal.open();
-        this.reset();
       }
 
       reset() {
