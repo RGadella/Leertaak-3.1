@@ -119,6 +119,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.modalBericht = `De ingredienten zijn aangepast`
           this.gerechten.forEach(function(gerecht) {
             if(gerecht.naam == thus.gerechtnaam){
+              console.log(thus._ingredienten);
               thus.splice('gerechten', thus.gerechten.indexOf(gerecht), 1);
               thus.push('gerechten', { naam: gerecht.naam, ingredienten: thus._ingredienten, actief: gerecht.actief })
             }

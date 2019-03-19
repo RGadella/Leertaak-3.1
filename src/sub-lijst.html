@@ -30,6 +30,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-align: left;
         padding: 5px;
       }
+
+      .actief {
+        color: green;
+        background-color: green;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+      }
+
+      .inactief {
+        color: red;
+        background-color: red;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+      }
     </style>
 
     <div class="card">
@@ -44,11 +60,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <tr>
             <td>[[item.naam]]</td>
             <td>
-              <template is="dom-repeat" items=[[item.ingredienten]] as="ingredient">
-              [[ingredient]]
+              [[item.ingredienten]]
+            </td>
+            <td>
+              <template is="dom-if" if=[[item.actief]]>
+                <div class="actief"></div>
+              </template>
+              <template is="dom-if" if="[[!item.actief]]">
+                <div class="inactief"></div>
               </template>
             </td>
-            <td>[[item.actief]]</td>
           </tr>
         </template>
       </table>
